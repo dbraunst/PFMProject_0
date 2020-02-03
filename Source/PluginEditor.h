@@ -11,25 +11,32 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "PluginProcessor.h"
+//#include "PluginProcessor.h"
 
+struct Pfmproject0AudioProcessor;
 //==============================================================================
 /**
 */
-class Pfmproject_0AudioProcessorEditor  : public AudioProcessorEditor
+class Pfmproject0AudioProcessorEditor  : public AudioProcessorEditor
 {
 public:
-    Pfmproject_0AudioProcessorEditor (Pfmproject_0AudioProcessor&);
-    ~Pfmproject_0AudioProcessorEditor();
+    Pfmproject0AudioProcessorEditor (Pfmproject0AudioProcessor&);
+    ~Pfmproject0AudioProcessorEditor();
 
     //==============================================================================
     void paint (Graphics&) override;
     void resized() override;
 
+    void mouseDown(const MouseEvent& e) override;
+    void mouseUp(const MouseEvent& e) override;
+    void mouseDrag(const MouseEvent& e) override;
+    
 private:
+    Point<int> lastClickPos;
+    
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    Pfmproject_0AudioProcessor& processor;
+    Pfmproject0AudioProcessor& processor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject_0AudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject0AudioProcessorEditor)
 };

@@ -8,6 +8,16 @@
   ==============================================================================
 */
 
+/*
+ TODO:
+    click anywhere on the window, and play a note
+    if youn clcick and drag, it'll change the pitch of the note
+    Should we play a sound?
+ 
+    save plugin state when exiting DAW
+    load plugin state when loading a session
+ */
+
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -15,12 +25,12 @@
 //==============================================================================
 /**
 */
-class Pfmproject_0AudioProcessor  : public AudioProcessor
+class Pfmproject0AudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    Pfmproject_0AudioProcessor();
-    ~Pfmproject_0AudioProcessor();
+    Pfmproject0AudioProcessor();
+    ~Pfmproject0AudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -55,7 +65,14 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    AudioParameterBool* shouldPlaySound = nullptr;
+    AudioParameterFloat* bgColor = nullptr;
+    
+    static void UpdateAutomatableParameter(RangedAudioParameter*, float value);
 private:
+    
+    //AudioProcessorValueTreeState apvts;
+    Random r;
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject_0AudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject0AudioProcessor)
 };

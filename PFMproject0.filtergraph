@@ -5,7 +5,7 @@
     <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="ROLI Ltd." version="1.0" file="" uid="246006c0"
             isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
-            numOutputs="2" isShell="0"/>
+            numOutputs="4" isShell="0"/>
     <STATE>0.</STATE>
     <LAYOUT>
       <INPUTS>
@@ -31,7 +31,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="3" x="0.5" y="0.9000000000000000222">
+  <FILTER uid="3" x="0.5" y="0.8998505231689087891">
     <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="ROLI Ltd." version="1.0" file="" uid="724248cb"
             isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="6"
@@ -39,18 +39,19 @@
     <STATE>0.</STATE>
     <LAYOUT>
       <INPUTS>
-        <BUS index="0" layout="L R"/>
+        <BUS index="0" layout="L R Ls Rs"/>
       </INPUTS>
       <OUTPUTS>
         <BUS index="0" layout="disabled"/>
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="4" x="0.39072847682119205004" y="0.52914798206278024217"
-          uiLastX_Normal="50" uiLastY_Normal="390" uiopen_Normal="0">
+  <FILTER uid="5" x="0.35761589403973509382" y="0.49626307922272050455"
+          uiLastX_Normal="405" uiLastY_Normal="147" uiopen_Normal="0" uiLastX_Generic="467"
+          uiLastY_Generic="360" uiopen_Generic="0">
     <PLUGIN name="PFMProject_0" format="VST3" category="Instrument|Synth"
             manufacturer="yourcompany" version="1.0.0" file="/Users/dbraunst/Library/Audio/Plug-Ins/VST3/PFMProject_0.vst3"
-            uid="acfa18cf" isInstrument="1" fileTime="16b86ee0410" infoUpdateTime="16b8708e156"
+            uid="acfa18cf" isInstrument="1" fileTime="16c263544e8" infoUpdateTime="16c2635b78c"
             numInputs="0" numOutputs="2" isShell="0"/>
     <STATE>152.VMjLg7H....OVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
     <LAYOUT>
@@ -60,6 +61,6 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <CONNECTION srcFilter="4" srcChannel="0" dstFilter="3" dstChannel="0"/>
-  <CONNECTION srcFilter="4" srcChannel="1" dstFilter="3" dstChannel="1"/>
+  <CONNECTION srcFilter="5" srcChannel="0" dstFilter="3" dstChannel="0"/>
+  <CONNECTION srcFilter="5" srcChannel="1" dstFilter="3" dstChannel="1"/>
 </FILTERGRAPH>
