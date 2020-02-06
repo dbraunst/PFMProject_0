@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="pjbFRy" name="PFMProject0" projectType="audioplug" jucerVersion="5.4.5"
+<JUCERPROJECT id="pjbFRy" name="PFMProject0" projectType="audioplug" jucerVersion="5.4.6"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginName="PFMProject0">
   <MAINGROUP id="vDxch6" name="PFMProject0">
