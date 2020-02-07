@@ -21,28 +21,13 @@ Pfmproject0AudioProcessor::Pfmproject0AudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )//,
+                       ),
 #endif
-/*
 apvts(*this, nullptr)
-{
-    auto shouldPlaySoundParam = std::make_unique<AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySound", false);
-
-    auto* param = apvts.createAndAddParameter( std::move( shouldPlaySoundParam ) );
-    
-    shouldPlaySound = dynamic_cast<AudioParameterBool*>( param );
-    
-    auto bgColorParam = std::make_unique<AudioParameterFloat>("Background Color", "background color", 0.f, 1.f, 0.5f);
-    param = apvts.createAndAddParameter(std::move(bgColorParam));
-    bgColor = dynamic_cast<AudioParameterFloat*>(param);
-    
-    apvts.state = ValueTree("PFMSynthValueTree"); //serializes plugin parameters into XML
-}
-*/
-//shouldPlaySound("ShouldPlaySoundParam", "ShouldPlaySound", false)
 {
     shouldPlaySound = new AudioParameterBool("ShouldPlaySoundParam", "ShouldPlaySound", false);
     addParameter(shouldPlaySound);
+    apvts.createAndAddParameter(<#std::unique_ptr<RangedAudioParameter> parameter#>)
 }
 
 Pfmproject0AudioProcessor::~Pfmproject0AudioProcessor()

@@ -71,7 +71,7 @@ public:
     static void UpdateAutomatableParameter(RangedAudioParameter*, float value);
 private:
     
-    //AudioProcessorValueTreeState apvts;
+    AudioProcessorValueTreeState apvts;
     Random r;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject0AudioProcessor)
