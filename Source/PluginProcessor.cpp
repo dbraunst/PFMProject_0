@@ -25,9 +25,19 @@ Pfmproject0AudioProcessor::Pfmproject0AudioProcessor()
 #endif
 apvts(*this, nullptr)
 {
-    shouldPlaySound = new AudioParameterBool("ShouldPlaySoundParam", "ShouldPlaySound", false);
-    addParameter(shouldPlaySound);
-    apvts.createAndAddParameter(<#std::unique_ptr<RangedAudioParameter> parameter#>)
+    //shouldPlaySound = new AudioParameterBool("ShouldPlaySoundParam", "ShouldPlaySound", false);
+    //addParameter(shouldPlaySound);
+    auto shouldPlaySoundParam = std::make_unique<AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySound", false);
+    
+    auto* param = apvts.createAndAddParameter(std::move(shouldPlaySoundParam));
+    
+    shouldPlaySound = dynamic_cast<AudioParameterBool*>(param);
+    
+    auto bgColorParam = std::make_unique<AudioParameterFloat>("Background color", "background color", 0.f, 1.f, 0.5f);
+    param = apvts.createAndAddParameter( std::move(bgColorParam) );
+    bgColor = dynamic_cast<AudioParameterFloat*>(param);
+    
+    apvts.state = ValueTree("PFMSynthValueTree");
 }
 
 Pfmproject0AudioProcessor::~Pfmproject0AudioProcessor()
@@ -189,19 +199,27 @@ void Pfmproject0AudioProcessor::getStateInformation (MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
     
-    //DBG( apvts.state.toXmlString() );
+    DBG( apvts.state.toXmlString() );
     //DBG( "Hello" );
-    //MemoryOutputStream mos(destData, false);
-    //apvts.state.writeToStream(mos);
+    MemoryOutputStream mos(destData, false);
+    apvts.state.writeToStream(mos);
 }
 
 void Pfmproject0AudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
-    //MemoryBlock mb (data, static_cast<size_t>(sizeInBytes) );
-    //MemoryInputStream mis(mb, false);
-    //apvts.state.readFromStream(mis);
+    MemoryBlock mb (data, static_cast<size_t>(sizeInBytes));
+    MemoryInputStream mis (mb, false);
+    apvts.state.readFromStream(mis);
+    
+    ValueTree tree = ValueTree::readFromData(data, static_cast<size_t>(sizeInBytes));
+    if(tree.isValid())
+    {
+        apvts.state = tree;
+    }
+    
+    DBG(apvts.state.toXmlString());
 }
 
 void Pfmproject0AudioProcessor::UpdateAutomatableParameter(RangedAudioParameter* param, float value)

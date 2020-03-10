@@ -10,9 +10,9 @@
 
 /*
  TODO:
-    click anywhere on the window, and play a note
-    if youn clcick and drag, it'll change the pitch of the note
-    Should we play a sound?
+    click anywhere on window, play a note
+    automation should update window display
+    if you lcick _+ drag, change pitch note
  
     save plugin state when exiting DAW
     load plugin state when loading a session

@@ -17,7 +17,10 @@ Pfmproject0AudioProcessorEditor::Pfmproject0AudioProcessorEditor (Pfmproject0Aud
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
+    
+    cachedBgColor = processor.bgColor->get(); //not using updated bc GUI is not present until after setSize
     setSize (400, 300);
+    startTimerHz(20);
 }
 
 Pfmproject0AudioProcessorEditor::~Pfmproject0AudioProcessorEditor()
@@ -30,11 +33,22 @@ Pfmproject0AudioProcessorEditor::~Pfmproject0AudioProcessorEditor()
     
 }
 
+void Pfmproject0AudioProcessorEditor::timerCallback()
+{
+    update();
+}
+
+void Pfmproject0AudioProcessorEditor::update()
+{
+    cachedBgColor = processor.bgColor->get();
+    repaint();
+}
+
 //==============================================================================
 void Pfmproject0AudioProcessorEditor::paint (Graphics& g) 
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId).interpolatedWith(Colours::cyan, cachedBgColor));
 
     g.setColour (Colours::white);
     g.setFont (15.0f);
@@ -62,8 +76,8 @@ void Pfmproject0AudioProcessorEditor::mouseDown(const MouseEvent& e)
     //processor.shouldPlaySound->setValueNotifyingHost(!processor.shouldPlaySound->get());
     //processor.shouldPlaySound->endChangeGesture();
     
-    Pfmproject0AudioProcessor::UpdateAutomatableParameter(processor.shouldPlaySound,
-                                                        !processor.shouldPlaySound->get());
+    //Pfmproject0AudioProcessor::UpdateAutomatableParameter(processor.shouldPlaySound,
+    //                                                  !processor.shouldPlaySound->get());
     lastClickPos = e.getPosition();
 }
 
@@ -71,11 +85,13 @@ void Pfmproject0AudioProcessorEditor::mouseDrag(const MouseEvent &e)
 {
     auto clickPos = e.getPosition();
     
-    //calculate how much mosue has moved
-    //auto difY = jlimit(-1.0, 1.0, -(clickPos.y) / (static_cast<double>(getHeight())* 2));
-    auto difY = jmap(double(clickPos.y), 0.0, (double)getHeight(), 1.0, 0.0);
+    //calculate how much mouse has moved
+    auto difY = jlimit(-1.0, 1.0, -(clickPos.y - lastClickPos.y) / (static_cast<double>(getHeight())* 2));
+    //auto difY = jmap(double(clickPos.y), 0.0, (double)getHeight(), 1.0, 0.0);
     
     DBG ( "difY: " << difY);
+    
+    update();
     
     Pfmproject0AudioProcessor::UpdateAutomatableParameter(processor.bgColor, difY);
 }
